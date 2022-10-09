@@ -1,6 +1,6 @@
 package circularrotation
 
-func CircularArrayRotation(a []int32, k int32, queries []int32) []int32 {
+func QueryArrayCircularRotation(a []int32, k int32, queries []int32) []int32 {
 	k = k % int32(len(a))
 
 	pre := a[(int32(len(a)) - k):]

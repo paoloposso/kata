@@ -7,7 +7,7 @@ import (
 
 type LinkedList[T any] struct {
 	head   *Node[T]
-	length int
+	Length int
 }
 
 type Node[T any] struct {
@@ -20,7 +20,7 @@ func NewLinkedList[T any]() *LinkedList[T] {
 }
 
 func (linkedList *LinkedList[T]) InsertAt(value T, index int) error {
-	if index > linkedList.length {
+	if index > linkedList.Length {
 		return errors.New("out of range")
 	}
 	newNode := &Node[T]{value: value, next: nil}
@@ -37,22 +37,18 @@ func (linkedList *LinkedList[T]) InsertAt(value T, index int) error {
 		prev.next = newNode
 	}
 	newNode.next = next
-	linkedList.length++
+	linkedList.Length++
 	return nil
 }
 
 func (linkedList *LinkedList[T]) RemoveAt(index int) error {
-	if index > linkedList.length {
+	if linkedList.Length < index+1 {
 		return errors.New("out of range")
 	}
-
 	prev := linkedList.head
-
-	for i := 0; i < index && prev != nil; i++ {
+	for i := 0; i < index-1; i++ {
 		prev = prev.next
 	}
-
-	prev.next.next = nil
 	prev.next = prev.next.next
 	return nil
 }
@@ -62,7 +58,7 @@ func (linkedList *LinkedList[T]) Prepend(value T) {
 
 	newNode.next = linkedList.head
 	linkedList.head = newNode
-	linkedList.length++
+	linkedList.Length++
 }
 
 func (linkedList *LinkedList[T]) Append(value T) {
@@ -70,6 +66,7 @@ func (linkedList *LinkedList[T]) Append(value T) {
 
 	if linkedList.head == nil {
 		linkedList.head = newNode
+		linkedList.Length++
 		return
 	}
 	tail := linkedList.head
@@ -77,7 +74,7 @@ func (linkedList *LinkedList[T]) Append(value T) {
 		tail = tail.next
 	}
 	tail.next = newNode
-	linkedList.length++
+	linkedList.Length++
 }
 
 func (linkedList *LinkedList[T]) Print() {
@@ -89,7 +86,7 @@ func (linkedList *LinkedList[T]) Print() {
 }
 
 func (linkedList LinkedList[T]) Get(index int) (*T, error) {
-	if index-1 > linkedList.length {
+	if index-1 > linkedList.Length {
 		return nil, errors.New("out of range")
 	}
 	result := linkedList.head

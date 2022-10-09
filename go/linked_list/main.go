@@ -11,7 +11,7 @@ func main() {
 	ll.Prepend("1")
 	ll.Prepend("2")
 	ll.Append("3")
-	ll.InsertAt("200", 3)
+	ll.InsertAt("200", -1)
 
 	ll.Print()
 	fmt.Println()

@@ -1,11 +1,4 @@
-package main
-
-import "fmt"
-
-func main() {
-	sorted := bubbleSort([]int{2, 3, 4, 1, 7, 9})
-	fmt.Print(sorted)
-}
+package bubble
 
 func bubbleSort(array []int) []int {
 	for {
@@ -23,4 +16,18 @@ func bubbleSort(array []int) []int {
 		}
 	}
 	return array
+}
+
+func bubbleSortRecur(array []int, length int) {
+	for i := 0; i < length-1; i++ {
+		if array[i] > array[i+1] {
+			temp := array[i]
+			array[i] = array[i+1]
+			array[i+1] = temp
+		}
+	}
+	if length == 0 {
+		return
+	}
+	bubbleSortRecur(array, length-1)
 }

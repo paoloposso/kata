@@ -1,6 +1,6 @@
 package bubble
 
-func bubbleSort(array []int) []int {
+func Sort(array []int) []int {
 	for {
 		changed := false
 		for i := 0; i < len(array)-1; i++ {
@@ -18,7 +18,7 @@ func bubbleSort(array []int) []int {
 	return array
 }
 
-func bubbleSortRecur(array []int, length int) {
+func SortRecur(array []int, length int) {
 	for i := 0; i < length-1; i++ {
 		if array[i] > array[i+1] {
 			temp := array[i]
@@ -29,5 +29,5 @@ func bubbleSortRecur(array []int, length int) {
 	if length == 0 {
 		return
 	}
-	bubbleSortRecur(array, length-1)
+	SortRecur(array, length-1)
 }

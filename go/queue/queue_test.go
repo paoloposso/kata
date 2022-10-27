@@ -7,19 +7,49 @@ import (
 
 func TestPush(t *testing.T) {
 	q := queue.NewQueue[string]()
-	q.Push("aaaa")
-	q.Push("bbbb")
-	q.Push("cccc")
-	q.Push("dddd")
-	q.Push("eeee")
+	q.Queue("aaaa")
+	q.Queue("bbbb")
+	q.Queue("cccc")
+	q.Queue("dddd")
+	q.Queue("eeee")
 
-	v := q.Pop()
+	v := q.Dequeue()
 	if v.Data != "aaaa" {
 		t.Fail()
 	}
 
-	v = q.Pop()
+	v = q.Dequeue()
 	if v.Data != "bbbb" {
+		t.Fail()
+	}
+}
+
+func TestLength(t *testing.T) {
+	q := queue.NewQueue[string]()
+	q.Queue("aaaa")
+	q.Queue("bbbb")
+	q.Queue("cccc")
+	q.Queue("dddd")
+	q.Queue("eeee")
+
+	v := q.Dequeue()
+	if v.Data != "aaaa" {
+		t.Fail()
+	}
+
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+	q.Dequeue()
+
+	if q.Length != 0 {
 		t.Fail()
 	}
 }

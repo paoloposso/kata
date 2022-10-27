@@ -3,8 +3,9 @@ package queue
 import "fmt"
 
 type Queue[T any] struct {
-	tail *Item[T]
-	head *Item[T]
+	tail   *Item[T]
+	head   *Item[T]
+	Length int32
 }
 
 type Item[T any] struct {
@@ -13,29 +14,36 @@ type Item[T any] struct {
 }
 
 func NewQueue[T any]() *Queue[T] {
-	return &Queue[T]{tail: nil, head: nil}
+	return &Queue[T]{tail: nil, head: nil, Length: 0}
 }
 
-func (queue *Queue[T]) Push(data T) {
+func (queue *Queue[T]) Queue(data T) {
+	queue.Length++
 	newItem := &Item[T]{
 		Data: data,
 		next: nil,
 	}
-	if queue.tail != nil {
-		queue.tail.next = newItem
-	}
-	queue.tail = newItem
-	if queue.head == nil {
+	if queue.tail == nil {
+		queue.tail = newItem
 		queue.head = newItem
+		return
 	}
+	queue.tail.next = newItem
+	queue.tail = newItem
 }
 
-func (queue *Queue[T]) Pop() *Item[T] {
+func (queue *Queue[T]) Dequeue() *Item[T] {
 	result := queue.head
-	if queue.head != nil {
-		queue.head = queue.head.next
+	if result == nil {
+		return result
 	}
+	queue.head = queue.head.next
+	queue.Length--
 	return result
+}
+
+func (queue *Queue[T]) Peek() *Item[T] {
+	return queue.head
 }
 
 func (queue Queue[T]) PrintQueue() {

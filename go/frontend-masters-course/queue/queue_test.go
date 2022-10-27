@@ -1,12 +1,11 @@
-package queue_test
+package queue
 
 import (
-	"queue"
 	"testing"
 )
 
 func TestPush(t *testing.T) {
-	q := queue.NewQueue[string]()
+	q := NewQueue[string]()
 	q.Queue("aaaa")
 	q.Queue("bbbb")
 	q.Queue("cccc")
@@ -25,7 +24,7 @@ func TestPush(t *testing.T) {
 }
 
 func TestLength(t *testing.T) {
-	q := queue.NewQueue[string]()
+	q := NewQueue[string]()
 	q.Queue("aaaa")
 	q.Queue("bbbb")
 	q.Queue("cccc")

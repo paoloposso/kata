@@ -1,13 +1,12 @@
-package bubble_test
+package bubble
 
 import (
-	"bubble"
 	"testing"
 )
 
 func TestSortRecur(t *testing.T) {
 	arr := []int{8, 9, 10, 5, 3, 6}
-	bubble.SortRecur(arr, len(arr))
+	SortRecur(arr, len(arr))
 
 	if arr[3] < arr[2] {
 		t.Fail()
@@ -16,7 +15,7 @@ func TestSortRecur(t *testing.T) {
 
 func TestSort(t *testing.T) {
 	arr := []int{8, 9, 10, 5, 3, 6}
-	bubble.SortRecur(arr, len(arr))
+	SortRecur(arr, len(arr))
 
 	if arr[3] < arr[2] {
 		t.Fail()

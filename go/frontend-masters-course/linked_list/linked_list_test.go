@@ -1,12 +1,11 @@
-package linkedlist_test
+package linkedlist
 
 import (
-	"linkedlist"
 	"testing"
 )
 
 func TestAppend(t *testing.T) {
-	linkedList := &linkedlist.LinkedList[string]{}
+	linkedList := &LinkedList[string]{}
 	linkedList.Append("5")
 	v, err := linkedList.Get(0)
 	if err != nil {
@@ -29,7 +28,7 @@ func TestAppend(t *testing.T) {
 }
 
 func TestPrepend(t *testing.T) {
-	linkedList := &linkedlist.LinkedList[string]{}
+	linkedList := &LinkedList[string]{}
 	linkedList.Prepend("5")
 	v, err := linkedList.Get(0)
 	if err != nil {
@@ -52,7 +51,7 @@ func TestPrepend(t *testing.T) {
 }
 
 func TestInsertAt(t *testing.T) {
-	linkedList := &linkedlist.LinkedList[string]{}
+	linkedList := &LinkedList[string]{}
 	linkedList.Prepend("5")
 	linkedList.Prepend("10")
 	linkedList.Prepend("t10")
@@ -65,7 +64,7 @@ func TestInsertAt(t *testing.T) {
 }
 
 func TestRemoveAt(t *testing.T) {
-	linkedList := &linkedlist.LinkedList[string]{}
+	linkedList := &LinkedList[string]{}
 	linkedList.Append("5")
 	linkedList.Append("10")
 	linkedList.Append("BBB")
@@ -82,7 +81,7 @@ func TestRemoveAt(t *testing.T) {
 }
 
 func TestRemoveAtOutOfRange(t *testing.T) {
-	linkedList := &linkedlist.LinkedList[string]{}
+	linkedList := &LinkedList[string]{}
 	linkedList.Append("5")
 	linkedList.Append("10")
 	linkedList.Append("BBB")

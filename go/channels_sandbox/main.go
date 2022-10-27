@@ -66,6 +66,5 @@ func main() {
 		close(quit)
 	}()
 
-	fmt.Println(<-quit)
-
+	fmt.Println(<-quit) //will quit when this channel closes
 }

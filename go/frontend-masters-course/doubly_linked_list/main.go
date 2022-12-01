@@ -43,17 +43,9 @@ func (l *LinkedList) prepend(value string) {
 	l.head = newNode
 }
 
-func (l *LinkedList) printList() {
-	cur := l.head
-	for cur != nil {
-		print(cur.value + "->")
-		cur = cur.next
-	}
-}
-
 func (l *LinkedList) insertAt(value string, index int) error {
 	if l.length < index {
-		return errors.New("index must be equals or minor list length")
+		return errors.New("index must be within list")
 	}
 	l.length++
 	if index == 0 {
@@ -76,6 +68,35 @@ func (l *LinkedList) insertAt(value string, index int) error {
 	return nil
 }
 
+func (l *LinkedList) removeAt(index int) error {
+
+	if l.length < index {
+		return errors.New("index must be within list")
+	}
+
+	l.length--
+
+	cur := l.head
+
+	for i := 0; i < index; i++ {
+		cur = cur.next
+	}
+	cur.next.previous = cur.previous
+	cur.previous.next = cur.next
+	cur.next = nil
+	cur.previous = nil
+
+	return nil
+}
+
+func (l *LinkedList) printList() {
+	cur := l.head
+	for cur != nil {
+		print(cur.value + "<->")
+		cur = cur.next
+	}
+}
+
 func main() {
 	ll := LinkedList{}
 	ll.prepend("11111")
@@ -85,8 +106,11 @@ func main() {
 	ll.prepend("ffff")
 	ll.prepend("ffxxx")
 	ll.append("ffxxx")
-	ll.insertAt("insertedAt 3", 8)
-
+	ll.insertAt("insertedAt3", 3)
+	ll.insertAt("insertedAt8", 100)
+	ll.printList()
+	println("")
+	ll.removeAt(1)
 	ll.printList()
 	println("")
 	println(ll.length)

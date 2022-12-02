@@ -16,31 +16,33 @@ type Node struct {
 	previous *Node
 }
 
-func (l *LinkedList) append(value string) {
+func (l *LinkedList) append(value string) *Node {
 	l.length++
 	newNode := &Node{value: value}
 	if l.head == nil {
 		l.head = newNode
 		l.tail = newNode
-		return
+		return newNode
 	}
 	tail := l.tail
 	tail.next = newNode
 	tail.next.previous = tail
 	l.tail = newNode
+	return newNode
 }
 
-func (l *LinkedList) prepend(value string) {
+func (l *LinkedList) prepend(value string) *Node {
 	l.length++
 	newNode := &Node{value: value}
 	if l.head == nil {
 		l.head = newNode
 		l.tail = newNode
-		return
+		return newNode
 	}
 	newNode.next = l.head
 	l.head.previous = newNode
 	l.head = newNode
+	return newNode
 }
 
 func (l *LinkedList) insertAt(value string, index int) error {
@@ -68,27 +70,6 @@ func (l *LinkedList) insertAt(value string, index int) error {
 	return nil
 }
 
-func (l *LinkedList) removeAt(index int) error {
-
-	if l.length < index {
-		return errors.New("index must be within list")
-	}
-
-	l.length--
-
-	cur := l.head
-
-	for i := 0; i < index; i++ {
-		cur = cur.next
-	}
-	cur.next.previous = cur.previous
-	cur.previous.next = cur.next
-	cur.next = nil
-	cur.previous = nil
-
-	return nil
-}
-
 func (l *LinkedList) printList() {
 	cur := l.head
 	for cur != nil {
@@ -99,7 +80,7 @@ func (l *LinkedList) printList() {
 
 func main() {
 	ll := LinkedList{}
-	ll.prepend("11111")
+	_ = ll.append("11111")
 	ll.append("aaaa")
 	ll.append("bbb")
 	ll.append("bbbssssdsd")
@@ -110,7 +91,6 @@ func main() {
 	ll.insertAt("insertedAt8", 100)
 	ll.printList()
 	println("")
-	ll.removeAt(1)
 	ll.printList()
 	println("")
 	println(ll.length)

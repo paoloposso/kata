@@ -1,13 +1,16 @@
 package onetimepad
 
 import (
-	"fmt"
 	"testing"
 )
 
 func TestGenerateKey(t *testing.T) {
-	encrypted, dummy := Encrypt("Paolo")
+	original := "PAOLO"
 
-	fmt.Println(encrypted)
-	fmt.Println(dummy)
+	encrypted, dummy := Encrypt(original)
+	dec := Decrypt(dummy, encrypted)
+
+	if original != dec {
+		t.Fail()
+	}
 }

@@ -3,40 +3,39 @@ package main
 import "fmt"
 
 func quickSort(arr []int) {
-	qs(arr, 0, len(arr)-1)
+	quickSortRecur(arr, 0, len(arr)-1)
 }
 
-func qs(arr []int, lo int, hi int) {
+func quickSortRecur(arr []int, lo int, hi int) {
 	if lo >= hi {
 		return
 	}
 
-	pivotIdx := partition(arr, lo, hi)
+	p := partition(arr, lo, hi)
 
-	qs(arr, lo, pivotIdx-1)
-	qs(arr, pivotIdx+1, hi)
+	quickSortRecur(arr, lo, p-1)
+	quickSortRecur(arr, p+1, hi)
 }
 
-func partition(arr []int, lo int, hi int) int {
-	pivot := arr[hi]
-	idx := lo - 1
+func partition(arr []int, start int, end int) int {
+	pivot := arr[end]
 
-	// sort it
-	for i := 0; i < hi; i++ {
-		if arr[i] <= pivot {
-			idx++
-			// swap
-			arr[idx] = arr[idx] + arr[i]
-			arr[i] = arr[idx] - arr[i]
-			arr[idx] = arr[idx] - arr[i]
+	ix := start - 1
+
+	for j := start; j < end; j++ {
+		if arr[j] < pivot {
+			ix++
+			t := arr[ix]
+			arr[ix] = arr[j]
+			arr[j] = t
 		}
 	}
 
-	idx++
-	arr[hi] = arr[idx]
-	arr[idx] = pivot
+	t := arr[ix+1]
+	arr[ix+1] = arr[end]
+	arr[end] = t
 
-	return idx //pivot index
+	return ix + 1
 }
 
 func main() {

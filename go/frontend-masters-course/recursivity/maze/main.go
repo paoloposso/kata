@@ -6,30 +6,32 @@ import (
 	"time"
 )
 
-//todo - finish
+const block = "#"
+const goal = "$"
+const current = "|"
 
 type Point struct {
 	x int
 	y int
 }
 
-func generateRandomMaze(x int, y int, sparseness int) (maze [][]string, start Point, end Point) {
-	for i := 0; i < x; i++ {
+func generateRandomMaze(width int, height int) (maze [][]string, start Point) {
+	for i := 0; i < width; i++ {
 		line := []string{}
 
-		for j := 0; j < y; j++ {
+		for j := 0; j < height; j++ {
 			line = append(line, " ")
 		}
 		maze = append(maze, line)
 	}
 
-	end = getRandomPoint(x, y)
-	maze[end.x][end.y] = "$"
+	end := getRandomPoint(width, height)
+	maze[end.x][end.y] = goal
 
-	start = getRandomPoint(x, y)
-	maze[start.x][start.y] = "@"
+	start = getRandomPoint(width, height)
+	maze[start.x][start.y] = current
 
-	return maze, start, end
+	return maze, start
 }
 
 func printMaze(maze [][]string) {
@@ -39,35 +41,6 @@ func printMaze(maze [][]string) {
 		}
 		fmt.Println()
 	}
-}
-
-func Walk(maze [][]string, wall string, current Point, end Point, seen [][]bool, pathStack []Point) bool {
-	//off the map
-	if current.x < 0 || current.x > len(maze) {
-		return false
-	}
-	if current.y < 0 || current.y > len(maze[0]) {
-		return false
-	}
-	if maze[current.x][current.y] == wall {
-		return false
-	}
-	//end of the maze
-	if current.x == end.x && current.y == end.y {
-		return true
-	}
-	if seen[current.x][current.y] {
-		return false
-	}
-
-	pathStack = append(pathStack, current)
-
-	return true
-}
-
-func main() {
-	maze, _, _ := generateRandomMaze(4, 4, 0)
-	printMaze(maze)
 }
 
 func getRandomPoint(maxX, maxY int) Point {
@@ -81,4 +54,30 @@ func getRandomPoint(maxX, maxY int) Point {
 	result.y = rand.Intn(maxY)
 
 	return result
+}
+
+func solve(maze [][]string, start Point) {
+	path := []Point{}
+
+	dfs(maze, start, path)
+}
+
+func dfs(maze [][]string, current Point, path []Point) bool {
+	if maze[current.x][current.y] == goal {
+		return true
+	}
+
+	if current.x < 0 || current.x >= len(maze) || current.y < 0 || current.y >= len(maze[0]) {
+		return false
+	}
+
+}
+
+func main() {
+	maze, start := generateRandomMaze(10, 10)
+	printMaze(maze)
+
+	// path := solve(maze, "#", start, end)
+
+	// fmt.Println(path)
 }

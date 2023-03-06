@@ -9,11 +9,14 @@ import (
 const block = "#"
 const goal = "$"
 const current = "|"
+const seen = "."
 
 type Point struct {
 	x int
 	y int
 }
+
+type Maze [][]string
 
 func generateRandomMaze(width int, height int) (maze [][]string, start Point) {
 	for i := 0; i < width; i++ {
@@ -56,28 +59,51 @@ func getRandomPoint(maxX, maxY int) Point {
 	return result
 }
 
+func getDescendants(point Point) []Point {
+	descendants := []Point{}
+	descendants = append(descendants, Point{x: point.x + 1, y: point.y})
+	descendants = append(descendants, Point{x: point.x - 1, y: point.y})
+	descendants = append(descendants, Point{x: point.x, y: point.y + 1})
+	descendants = append(descendants, Point{x: point.x, y: point.y - 1})
+	return descendants
+}
+
 func solve(maze [][]string, start Point) {
 	path := []Point{}
-
 	dfs(maze, start, path)
 }
 
 func dfs(maze [][]string, current Point, path []Point) bool {
+	if current.x < 0 || current.x >= len(maze) || current.y < 0 || current.y >= len(maze[0]) {
+		return false
+	}
+	if maze[current.x][current.y] == seen {
+		return false
+	}
 	if maze[current.x][current.y] == goal {
 		return true
 	}
 
-	if current.x < 0 || current.x >= len(maze) || current.y < 0 || current.y >= len(maze[0]) {
-		return false
+	descendants := getDescendants(current)
+
+	for _, des := range descendants {
+		path = append(path, des)
+		maze[current.x][current.x] = seen
+		if dfs(maze, des, path) {
+			return true
+		}
 	}
 
+	path = path[:len(path)-1]
+
+	return false
 }
 
 func main() {
 	maze, start := generateRandomMaze(10, 10)
 	printMaze(maze)
 
-	// path := solve(maze, "#", start, end)
+	solve(maze, start)
 
 	// fmt.Println(path)
 }

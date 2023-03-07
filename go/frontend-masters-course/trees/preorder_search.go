@@ -1,8 +1,6 @@
-package preordersearch
+package trees
 
-import "trees/datastruct"
-
-func walk(curr *datastruct.BynaryNode, path []int32) []int32 {
+func walk(curr *BinaryNode, path []int32) []int32 {
 	//base case
 	if curr == nil {
 		return path
@@ -19,6 +17,6 @@ func walk(curr *datastruct.BynaryNode, path []int32) []int32 {
 	return path
 }
 
-func PreOrderSearch(head datastruct.BynaryNode) []int32 {
+func PreOrderSearch(head BinaryNode) []int32 {
 	return walk(&head, []int32{})
 }

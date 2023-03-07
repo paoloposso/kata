@@ -1,9 +1,7 @@
-package breadthfirstsearch
+package trees
 
-import "trees/datastruct"
-
-func Bfs(head datastruct.BynaryNode, needle int32) bool {
-	q := []datastruct.BynaryNode{head}
+func Bfs(head BinaryNode, needle int32) bool {
+	q := []BinaryNode{head}
 
 	for len(q) > 0 {
 		// pop

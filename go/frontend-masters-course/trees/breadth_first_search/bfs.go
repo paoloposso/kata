@@ -2,8 +2,8 @@ package breadthfirstsearch
 
 import "trees/datastruct"
 
-func Bfs(tree datastruct.BinaryTree, needle int32) bool {
-	q := []datastruct.BynaryNode{*tree.Head}
+func Bfs(head datastruct.BynaryNode, needle int32) bool {
+	q := []datastruct.BynaryNode{head}
 
 	for len(q) > 0 {
 		// pop

@@ -54,6 +54,29 @@ func TestBfs(t *testing.T) {
 	}
 }
 
+func TestDfs(t *testing.T) {
+
+	head := createTree()
+
+	result := dfs(&head, 20)
+
+	if result == false {
+		t.Fail()
+	}
+
+	result = Bfs(head, 800)
+
+	if result == true {
+		t.Fail()
+	}
+
+	result = Bfs(head, 18)
+
+	if result == false {
+		t.Fail()
+	}
+}
+
 func createTree() BinaryNode {
 	tr := BinaryTree{}
 

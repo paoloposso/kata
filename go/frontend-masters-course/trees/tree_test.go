@@ -152,3 +152,16 @@ func createTree2() BinaryNode {
 
 	return *tr.Head
 }
+
+func TestInsertMultiple(t *testing.T) {
+	var head *BinaryNode = &BinaryNode{Value: 5}
+
+	insert(head, 3)
+	insert(head, 8)
+	insert(head, 4)
+	insert(head, 1)
+
+	preOrderArr := PreOrderSearch(*head)
+
+	fmt.Printf("%v", preOrderArr)
+}

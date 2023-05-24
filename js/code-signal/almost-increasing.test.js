@@ -1,4 +1,6 @@
-const { isAlmostIncreasing } =  require('./almostIncreasing.js');
+const { expect } = require('expect');
+
+const { isAlmostIncreasing } =  require('./almost-increasing.js');
 
 test('Test false', () => {
     let result = isAlmostIncreasing([1,2,1,2])

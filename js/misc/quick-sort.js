@@ -26,12 +26,7 @@ const quickSortRecur = (arr, start, end) => {
     for (let j = start; j <= end; j++) {
         if (arr[j] < pivotValue) {
             pivotNeedle++;
-
-            let a = arr[pivotNeedle];
-            arr[pivotNeedle] = arr[j];
-            arr[j] = a;
-
-            // [arr[pivotNeedle], arr[j]] = [arr[j], arr[pivotNeedle]];
+            [arr[pivotNeedle], arr[j]] = [arr[j], arr[pivotNeedle]];
         }
     }
 

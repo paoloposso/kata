@@ -3,10 +3,11 @@
  * 
  * @param {[number]} arr 
  */
-const quickSort = (arr) => {
-    const result = quickSortRecur(arr, 0, arr.length);
+module.exports.quickSort = quickSort = (arr) => {
+    if (arr.length < 1) return arr;
+    const result = quickSortRecur(arr, 0, arr.length-1);
 
-    return result;
+    return arr;
 }
 
 /**
@@ -17,22 +18,27 @@ const quickSort = (arr) => {
  */
 const quickSortRecur = (arr, start, end) => {
 
-    if (start >= end) return arr;
+    if (start >= end) return;
 
-    let pivotPosition = start;
-    console.log(`pivot value ${arr[pivotPosition]}`);
+    let pivotNeedle = start;
+    let pivotValue = arr[start];
 
-    for (let i = start; i < end; i++) {
-        if (arr[i] < arr[pivotPosition]) {
-            [arr[pivotPosition], arr[i]] = [arr[i], arr[pivotPosition]];
-            pivotPosition = i;
+    for (let j = start; j <= end; j++) {
+        if (arr[j] < pivotValue) {
+            pivotNeedle++;
+
+            let a = arr[pivotNeedle];
+            arr[pivotNeedle] = arr[j];
+            arr[j] = a;
+
+            // [arr[pivotNeedle], arr[j]] = [arr[j], arr[pivotNeedle]];
         }
     }
 
-    arr = quickSortRecur(arr, 0, pivotPosition);
-    arr = quickSortRecur(arr, pivotPosition+1, end);
-
-    return arr;
+    [arr[start], arr[pivotNeedle]] = [arr[pivotNeedle], arr[start]];
+    
+    quickSortRecur(arr, start, pivotNeedle-1);
+    quickSortRecur(arr, pivotNeedle+1, end);
 }
 
-console.log(quickSort([55,8,1,20,4,2,18,22,29,30]));
+console.log(quickSort([5,18,1,23,44,8,2]));

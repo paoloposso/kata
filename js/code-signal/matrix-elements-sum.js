@@ -17,7 +17,6 @@ function solution(matrix) {
 
     for (let line = 0; line < matrix.length; line++) { //check lines
         for (let column=0; column < matrix[line].length; column++) {
-            console.log(`${line}x${column}`);
             if (emptiesMap.has(column) && emptiesMap.get(column) < line) {
                 continue;
             }

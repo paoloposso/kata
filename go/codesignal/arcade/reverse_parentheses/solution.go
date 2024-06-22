@@ -1,4 +1,4 @@
-package reverseparentesis
+package reverseparentheses
 
 func solution(inputString string) string {
 	q := []string{}
@@ -32,7 +32,7 @@ func solution(inputString string) string {
 
 func reverseString(s string) string {
 	runes := []rune(s)
-	runes = runes[1 : len(runes)-1]
+	runes = runes[1:]
 
 	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
 		runes[i], runes[j] = runes[j], runes[i]

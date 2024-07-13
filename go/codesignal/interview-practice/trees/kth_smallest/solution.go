@@ -30,7 +30,7 @@ func recur(t *Tree, arr []int, k int) []int {
 	}
 	if t.Left == nil {
 		arr = append(arr, t.Value.(int))
-		arr = recur(t.Left, arr, k)
+		// arr = recur(t.Left, arr, k)
 		arr = recur(t.Right, arr, k)
 	} else {
 		arr = recur(t.Left, arr, k)

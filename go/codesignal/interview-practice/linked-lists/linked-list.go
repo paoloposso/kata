@@ -1,4 +1,4 @@
-package interviewpractice
+package linkedlist
 
 type ListNode struct {
 	Value interface{}
